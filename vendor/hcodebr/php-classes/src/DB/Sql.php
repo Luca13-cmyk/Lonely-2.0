@@ -4,10 +4,10 @@ namespace Hcode\DB;
 
 class Sql {
 
-	const HOSTNAME = "mysql380.umbler.com";
-	const USERNAME = "luca17-cmyk";
-	const PASSWORD = "barcelona13";
-	const DBNAME = "db_ecommerce";
+	const HOSTNAME = "127.0.0.1";
+	const USERNAME = "root";
+	const PASSWORD = "";
+	const DBNAME = "dbphp7";
 
 	private $conn;
 

@@ -1,11 +1,12 @@
 <?php
 
 use \Hcode\PageAdmin;
+use \Hcode\DB\Sql;
 
 
 $app->get('/admin/login', function() {
 
-    
+    countQntIpPer();
 
     $page = new PageAdmin( [
         "footer"=>false,
@@ -16,12 +17,16 @@ $app->get('/admin/login', function() {
 });
 
 $app->get('/admin', function() {
+
+    countQntIpPer();
+
     
     $page = new PageAdmin();
 	$page->setTpl("dashboard");
 
 });
 $app->get('/admin/lembretes', function() {
+    countQntIpPer();
     
     $page = new PageAdmin();
 	$page->setTpl("lembretes");
@@ -29,6 +34,7 @@ $app->get('/admin/lembretes', function() {
 });
 
 $app->get('/admin/administracao', function() {
+    countQntIpPer();
     
     $page = new PageAdmin();
 	$page->setTpl("administracao");
@@ -37,33 +43,12 @@ $app->get('/admin/administracao', function() {
 
 
 
-$app->get('/admin/data', function() {
-    
-    
-    
-    $data = [
-        
-       "Mar"=> [
-            "nmVisitantes"=>5000,
-            "date"=>"03"
-       ],
-        "Apr"=> [
-            "nmVisitantes"=>8000,
-            "date"=>"04"
-        ]
-    ];
-    // $data = [
-    
-    //          "nmVisitantes"=>5000,
-    //          "date"=>"01"
+$app->get('/admin/data/countQntIpPer', function() {
 
-         
-    //  ];
-    $data = json_encode($data);
- 
-    echo $data;
-    
- 
+
+
+    echo json_encode(countQntIpPer(true));
+
  
  });
 

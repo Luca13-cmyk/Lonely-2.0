@@ -1,4 +1,16 @@
 
+
+
+
+
+
+
+
+
+$(function(){
+
+
+
 // ########### Variaveis
 
 $offset_area_per = $('.offset-area-per');
@@ -115,91 +127,55 @@ Valores = {};
 // ##############  CHARTAJAX
 
 
-if (document.querySelector("canvas") && document.getElementById("btnchartajax"))
-{
-  loadChartAjax();
-  var btnchartajax = document.getElementById("btnchartajax");
-  btnchartajax.addEventListener("click", loadChartAjax, false);
-}
 
 
-var meses = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
-var day = "";
-function loadChartAjax()
-{
-    var xhr = new XMLHttpRequest();
+  if (document.querySelector("canvas") && document.getElementById("btnchartajax"))
+  {
+    loadChartAjax();
+    var btnchartajax = document.getElementById("btnchartajax");
+    btnchartajax.addEventListener("click", loadChartAjax, false);
+    
+  }
 
+  var meses = [];
 
-    xhr.onload = function()
+  function loadChartAjax()
+  {
+      var xhr = new XMLHttpRequest();
   
-   
-      {
-      responseObject = JSON.parse(xhr.responseText);
-      // console.table(responseObject);
-        console.table(responseObject);
-        // console.log(responseObject.Mar.date);
-        let V = window.Valores;
-
-        // V.nmVisitantes = responseObject.Mar.nmVisitantes;
-        // console.log(V.nmVisitantes);
-        V.date = "04";
-
-        switch (V.date) {
-          case "01":
-            meses[0] = V.nmVisitantes;
-            console.log(meses[0]);
-            break;
-          case "02":
-            meses[1] = V.nmVisitantes;
-            console.log(meses[1]);
-            break;
-          case "03":
-            meses[2] = responseObject.Mar.nmVisitantes;
-            console.log(meses[2]);
-            break;
-          case "04":
-            meses[3] = responseObject.Apr.nmVisitantes;
-            console.log(meses[3]);
-            break;
-            case "05":
-            meses[4] = V.nmVisitantes;
-            console.log(meses[4]);
-            break;
-            case "06":
-            meses[5] = V.nmVisitantes;
-            console.log(meses[5]);
-            break;
-            case "07":
-            meses[6] = V.nmVisitantes;
-            console.log(meses[6]);
-            break;
-            case "08":
-            meses[7] = V.nmVisitantes;
-            console.log(meses[7]);
-            break;
+  
+      xhr.onload = function()
+    
+     
+        {
+          responseObject = JSON.parse(xhr.responseText);
+        // console.table(responseObject);
+          // console.table(responseObject);
+          const r = responseObject;
+          console.log(r[0].desnov);
           
+          
+          meses = [parseInt(r[0].desjan), parseInt(r[0].desfeb), parseInt(r[0].desmar),
+           parseInt(r[0].desapr), parseInt(r[0].desmay), parseInt(r[0].desjun), parseInt(r[0].desjul), 
+           parseInt(r[0].desago), parseInt(r[0].desset), parseInt(r[0].desout), parseInt(r[0].desnov), 
+           parseInt(r[0].desdez)];
+           
+          chartPer();
+          demo.initChartsPages();
+  
         }
-
-
-        console.log(V);
-        chartPer();
-        demo.initChartsPages();
-
-      }
-
-
   
-
-
-    xhr.open("GET", "http://127.0.0.1/admin/data", true);
-    xhr.send(null);
-
-
-
   
-}
-
-
+    
+  
+  
+      xhr.open("GET", "http://127.0.0.1/admin/data/countQntIpPer", true);
+      xhr.send(null);
+  
+  
+  
+    
+  }
 
 
 
@@ -310,19 +286,20 @@ demo = {
     chartColor = "#FFFFFF";
 
     ctx = document.getElementById('chartHours').getContext("2d");
-
+    // console.log(meses);
     myChart = new Chart(ctx, {
       type: 'line',
 
       data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "dez"],
         datasets: [{
             borderColor: "#6bd098",
             backgroundColor: "#6bd098",
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
-            data: [meses[0], 310, 316, 322, 330, 326, 333, 345, 338, 354]
+            data: [meses[0], meses[1], meses[2], meses[3], meses[4], meses[5], meses[6], meses[7], meses[8], meses[9], meses[10], meses[11]]
+            // data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, meses[10], 0]
           },
           {
             borderColor: "#f17e5d",
@@ -330,7 +307,7 @@ demo = {
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
-            data: [meses[0], meses[1], meses[2], meses[3], meses[4], meses[5], meses[6], meses[7], meses[8], meses[9]]
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             borderColor: "#fcc468",
@@ -338,7 +315,7 @@ demo = {
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
-            data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
@@ -619,4 +596,39 @@ demo = {
 
 };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+}); // JS 
+
+
+
+
+
+
+
 

@@ -44,15 +44,15 @@
 <script src="/res/admin/assets/lonely/lonelyTool.js"></script>
 <script src="/res/admin/assets/lonely/lonely.js"></script>
 <script>
-$(document).ready(function() {
-  // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-  if (document.querySelector("canvas") && document.getElementById("btnchartajax"))
-  {
+// $(document).ready(function() {
+//   // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+//   if (document.querySelector("canvas") && document.getElementById("btnchartajax"))
+//   {
      
-      demo.initChartsPages();
+//       demo.initChartsPages();
 
-  }
-});
+//   }
+// });
 $(window).on("load", function(){
   $("#preloader").hide();
  });
