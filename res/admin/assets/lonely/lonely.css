@@ -1,0 +1,4 @@
+a[data-showProfile].active
+{
+    color: #ef8157 !important;
+}

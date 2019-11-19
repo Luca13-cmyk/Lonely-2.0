@@ -95,14 +95,69 @@ use \Hcode\DB\Sql;
         ":val"=>(int)$valantigo+1,
         ":valantigo"=>$valantigo
     ]);
-
     if ($return)
     {
-        return $results;
+        
+        $arr = [];
+        $results = $sql->select("SELECT * FROM tb_acessos");
+        $arr[0] = $results;
+        $arr[1] = $results[0][$mes];
+        return $arr;
     }
-
+    
+    // fazer com procedure quando for jogar no servidor !!
     // Teste
     // echo json_encode($data);
-	}
+    }
+    
+    function showVisitors($insert, $return = false)
+    {
+        $sql = new Sql();
+
+        if ($insert)
+        {
+            $sql->query("
+                INSERT INTO tb_visitors (desip, dessystem)
+                VALUES(:desip, :dessystem);
+        
+        ", [
+            ":desip"=>$_SERVER["REMOTE_ADDR"],
+            ":dessystem"=>$_SERVER['HTTP_USER_AGENT']
+            ]);
+        }
+        
+        if ($return)
+        {
+            $return = $sql->select("SELECT * FROM tb_visitors");
+            return $return;
+            
+            
+            // foreach ($return as $key => $value) {
+                
+            //     $value["dessystem"] = substr(strstr($value['dessystem'], ";"), 1);
+                
+            //     $system = explode(")", $value['dessystem']);
+            //     array_push($arr, $system[0], $value["desip"]);
+                
+
+            //     // echo "<li style='line-height: 55px;'><b style='padding-left: 5px;'>IP:" . $value["desip"] . "</b> | <i style='color: #853bfa'>" . 
+            //     //  $system[0] . "</i></li>";
+                
+            // }
+            // return $arr;
+            
+            
+        }
+
+
+        // fazer com procedure quando for jogar no servidor !!
+    }
+    function delVisitors()
+    {
+        $sql = new Sql();
+
+        $sql->query("TRUNCATE TABLE tb_visitors;");
+        
+    }
 
 ?>

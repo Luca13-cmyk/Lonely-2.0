@@ -191,6 +191,9 @@ const Lonely = (function(){
             },
             
     
+        },
+        data: {
+            
         }
     
         

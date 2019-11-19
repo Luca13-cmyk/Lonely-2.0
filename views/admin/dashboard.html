@@ -17,13 +17,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
+                      <i class="nc-icon nc-email-85 text-warning"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Capacity</p>
-                      <p class="card-title">150GB
+                      <p class="card-category">E-mail</p>
+                      <p class="card-title">4
                         <p>
                     </div>
                   </div>
@@ -32,7 +32,9 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
+                    <button id="entrarEmail" class="btn btn-outline-warning btn-round" onclick="window.location.href = '/admin/email'">
+                      <i class="nc-icon nc-chat-33"></i> Acessar
+                    </button>
                 </div>
               </div>
             </div>
@@ -74,8 +76,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23
+                      <p class="card-category">Error Code</p>
+                      <p data-error_per class="card-title">
                         <p>
                     </div>
                   </div>
@@ -84,7 +86,10 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-clock-o"></i> In the last hour
+                  <!-- <i class="fa fa-clock-o"></i> In the last hour -->
+                  <button id="listarerros" class="btn btn-outline-danger btn-round" data-toggle="modal" data-target="#codigos_erros">
+                      <i class="nc-icon nc-bullet-list-67"></i>Listar erros
+                    </button>
                 </div>
               </div>
             </div>
@@ -101,8 +106,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Grafico</p>
-                      <p class="card-title">
+                      <p class="card-category">Graficos</p>
+                      <p class="card-title">3
                         <p>
                     </div>
                   </div>
@@ -125,8 +130,8 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Users Behavior</h5>
-                <p class="card-category">24 Hours performance</p>
+                <h5 class="card-title">Numero de visitas</h5>
+                <p data-nqnt="value" class="card-category"></p>
               </div>
               <div class="card-body ">
                 <canvas id=chartHours width="400" height="100"></canvas>
@@ -134,7 +139,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-history"></i> Updated 3 minutes ago
+                  <i data-update-per-visitas class="fa fa-history"></i> 
                 </div>
               </div>
             </div>
@@ -234,6 +239,32 @@
           
         </div>
       </div>
+
+  
+  <!-- Modal Code Error -->
+  <div class="modal fade" id="codigos_erros" tabindex="-1" role="dialog" aria-labelledby="codigos_erros" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Codigos de erros</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b>1 -></b> <i>Erro na requisicao do ajax. Ou dados incompletos recebidos. Codigo Atual: <small id="show_error_code_ajax"></small></i>
+          <hr>
+          <b>2 -></b> <i>Dados nao foram bem trabalhados, provavelmente, dados incompletos ou erro de sintaxe. Error: <small id="show_error_code_trycatch_ajax"></small></i>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 <!--       
       <div data-filter="Sockess" class="card" style="width: 18rem;">

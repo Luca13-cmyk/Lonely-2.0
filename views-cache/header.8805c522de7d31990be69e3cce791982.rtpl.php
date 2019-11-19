@@ -22,6 +22,7 @@ Lonely
   <link rel="stylesheet" href="/res/admin/assets/lonely/demo.css">
   <link href="/res/admin/assets/lonely/sidebarconfig.css" rel="stylesheet" />
   <link href="/res/admin/assets/lonely/ferramentas.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/res/admin/assets/lonely/lonely.css">
   <!-- CSS loader -->
   <link rel="stylesheet" href="/res/admin/assets/loader2.0/loader.css">
 </head>
@@ -37,12 +38,12 @@ Lonely
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <a href="/admin/profile" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="/res/admin/assets/img/faces/luca.jpg">
           </div>
         </a>
-        <a href="/admin/profile" class="simple-text logo-normal">
+        <a data-showProfile href="/admin/profile" class='simple-text logo-normal <?php echo getCurrentHost("/admin/profile"); ?>'>
           LUCA NEGRETTE
           <!-- <div class="logo-image-big">
             <img src="/res/admin/assets/img/logo-big.png">
@@ -95,10 +96,16 @@ Lonely
               <p>Lembretes</p>
             </a>
           </li>
-          <li class="active-pro">
-            <a href="#">
+          <li>
+            <a href="https://github.com/Luca13-cmyk">
               <i class="nc-icon nc-spaceship"></i>
               <p>GITHUB</p>
+            </a>
+            </li>
+          <li class='active-pro'>
+            <a href="/admin/logout">
+              <i class="nc-icon nc-button-power"></i>
+              <p>Sair</p>
             </a>
           </li>
         </ul>
@@ -175,11 +182,22 @@ Lonely
       <div class="offset-area-per">
           <div class="offset-close"><i class="nc-icon nc-simple-remove"></i></div>
           <ul class="nav offset-menu-tab">
-              <li><a class="" data-toggle="tab" href="#activity">Activity</a></li>
+              <li><a class="" data-toggle="tab" href="#activity">Visitantes</a></li>
               <li><a data-toggle="tab" href="#settings" class="active show">Settings</a></li>
           </ul>
           <div class="offset-content tab-content">
               <div id="activity" class="tab-pane fade in">
+                  <button style="margin-left: 50px;" data-ajaxbuttonsips id="MostrarVisitantes" class="btn btn-outline-primary btn-round btn-sm">
+                      <i class="fa fa-refresh"></i> Mostrar Visitantes
+                    </button>
+                  <button style="margin-left: 50px;" data-ajaxbuttonsips id="ApagarRegistroVisitantes" class="btn btn-outline-danger btn-round btn-sm">
+                      <i class="nc-icon nc-basket"></i> Apagar registro
+                  </button>
+                <ol id="activity_content_ips">
+                  <!-- <li style="line-height: 55px;"><b style="padding-left: 5px;">IP: 127.0.0.1</b> | <i style="color: #853bfa"> Linux</i> </li> -->
+                  
+                    
+                </ol>
                </div>
               <div id="settings" class="tab-pane fade active show">
                   <div class="offset-settings">

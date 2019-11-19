@@ -6,7 +6,6 @@
 
 
 
-
 $(function(){
 
 
@@ -120,6 +119,144 @@ $("a[data-animation_scroll]").on("click", function(e){
 
 
 Valores = {};
+var meses = [];
+
+
+
+
+
+
+
+// ################### Visitors AJAX
+
+
+var ips = document.getElementById("activity_content_ips");
+var btn_visitors = document.getElementById("MostrarVisitantes");
+var bt_del_visitors_register = document.getElementById("ApagarRegistroVisitantes");
+
+
+if (ips && btn_visitors && bt_del_visitors_register)
+  {
+
+    btn_visitors.addEventListener("click", showVisitors, false); // evento ajax para atualizar.
+    bt_del_visitors_register.addEventListener("click", delVisitors, false); // evento ajax para apagar registro.
+      
+  }
+
+
+  function delVisitors()
+  {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function()
+  
+        {
+          //######## testes
+          // console.log(xhr.response.length);
+          // console.log(xhr.response);
+          // response = xhr.response;
+          // #######
+          
+          if (xhr.status === 200)
+          {
+            ips.innerHTML = "";
+            
+          } else 
+          {
+            document.querySelector("p[data-error_per]").innerHTML = 1;
+            document.getElementById("show_error_code_ajax").innerHTML = xhr.status;
+          }
+          
+          
+  
+        }
+
+
+    xhr.open("POST", "http://localhost/admin/data/delVisitors", true);
+    xhr.send(null);
+  }
+
+
+
+function showVisitors()
+  {
+      ips.innerHTML = ""; // limpa o historico, para n acumular requisicoes.
+
+      var xhr = new XMLHttpRequest(); // faz a requisicao.
+      
+      
+        xhr.onload = function()
+  
+        {
+          //######## testes
+          // console.log(xhr.response.length);
+          // console.log(xhr.response);
+          // response = xhr.response;
+          // #######
+          
+          if (xhr.status === 200)
+          {
+            try {
+              
+              responseObject = JSON.parse(xhr.responseText);
+              
+              const r = responseObject;
+              console.log(r[0].desip);
+              
+              // Quantidade de visualizacoes
+              // document.querySelector("p[data-nqnt]").innerHTML = "Atual: " + r[1];
+
+              // Ultima atualizacao
+              // var d = new Date();
+              // document.querySelector("i[data-update-per-visitas]").innerHTML = " Ultima atualizacao:  " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+
+              
+              
+
+              // Execucao no content
+              
+
+              for (let index = 0; index < r.length; index++) {
+                
+                ips.innerHTML += "<li data-access='" 
+                + r[index].dtaccess 
+                +  "' style='line-height: 55px;'><b style='padding-left: 5px;'>IP:" 
+                + r[index].desip + "</b> | <i style='color: #853bfa'>" 
+                +   r[index].dessystem + "</i><br> <small style='color: #333;'>" + r[index].dtaccess + "</small></li>";
+                
+              }
+              return;
+            
+            } catch (error) {
+              document.querySelector("p[data-error_per]").innerHTML = 2;
+              document.getElementById("show_error_code_trycatch_ajax").innerHTML = error.name;
+            }
+            
+          } else 
+          {
+            document.querySelector("p[data-error_per]").innerHTML = 1;
+            document.getElementById("show_error_code_ajax").innerHTML = xhr.status;
+          }
+          
+          
+  
+        }
+
+        
+      xhr.open("GET", "http://localhost/admin/data/showVisitors", true);
+      xhr.send(null);
+  
+  
+  }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,53 +265,79 @@ Valores = {};
 
 
 
+var btnchartajax = document.getElementById("btnchartajax");
 
-  if (document.querySelector("canvas") && document.getElementById("btnchartajax"))
+  if (document.querySelector("canvas") && btnchartajax)
   {
-    loadChartAjax();
-    var btnchartajax = document.getElementById("btnchartajax");
-    btnchartajax.addEventListener("click", loadChartAjax, false);
+    loadChartAjax(); // carrega o grafico na pagina.
+    
+    btnchartajax.addEventListener("click", loadChartAjax, false); // evento ajax para atualizar.
     
   }
 
-  var meses = [];
+  response = "";
 
   function loadChartAjax()
   {
       var xhr = new XMLHttpRequest();
+      
+      
+        xhr.onload = function()
   
-  
-      xhr.onload = function()
-    
-     
         {
-          responseObject = JSON.parse(xhr.responseText);
-        // console.table(responseObject);
-          // console.table(responseObject);
-          const r = responseObject;
-          console.log(r[0].desnov);
+          //######## testes
+          // console.log(xhr.response.length);
+          // console.log(xhr.response);
+          // response = xhr.response;
+          // #######
           
-          
-          meses = [parseInt(r[0].desjan), parseInt(r[0].desfeb), parseInt(r[0].desmar),
-           parseInt(r[0].desapr), parseInt(r[0].desmay), parseInt(r[0].desjun), parseInt(r[0].desjul), 
-           parseInt(r[0].desago), parseInt(r[0].desset), parseInt(r[0].desout), parseInt(r[0].desnov), 
-           parseInt(r[0].desdez)];
+          if (xhr.status === 200 && xhr.response.length > 6)
+          {
+            try {
+              
+              responseObject = JSON.parse(xhr.responseText);
            
-          chartPer();
-          demo.initChartsPages();
+              const r = responseObject;
+              
+              // Quantidade de visualizacoes
+              document.querySelector("p[data-nqnt]").innerHTML = "Atual: " + r[1];
+
+              // Ultima atualizacao
+              var d = new Date();
+              document.querySelector("i[data-update-per-visitas]").innerHTML = " Ultima atualizacao:  " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+
+              // Valores do banco de dados que vai para o grafico
+              meses = [parseInt(r[0][0].desjan), parseInt(r[0][0].desfeb), parseInt(r[0][0].desmar),
+              parseInt(r[0][0].desapr), parseInt(r[0][0].desmay), parseInt(r[0][0].desjun), parseInt(r[0][0].desjul), 
+              parseInt(r[0][0].desago), parseInt(r[0][0].desset), parseInt(r[0][0].desout), parseInt(r[0][0].desnov), 
+              parseInt(r[0][0].desdez)];
+
+              // Execucao do grafico
+              chartPer();
+              demo.initChartsPages();
+
+
+
+            } catch (error) {
+              document.querySelector("p[data-error_per]").innerHTML = 2;
+              document.getElementById("show_error_code_trycatch_ajax").innerHTML = error.name;
+            }
+            
+          } else 
+          {
+            document.querySelector("p[data-error_per]").innerHTML = 1;
+            document.getElementById("show_error_code_ajax").innerHTML = xhr.status;
+          }
+          
+          
   
         }
-  
-  
-    
-  
-  
-      xhr.open("GET", "http://127.0.0.1/admin/data/countQntIpPer", true);
+
+        
+      xhr.open("GET", "http://localhost/admin/data/countQntIpPer", true);
       xhr.send(null);
   
   
-  
-    
   }
 
 

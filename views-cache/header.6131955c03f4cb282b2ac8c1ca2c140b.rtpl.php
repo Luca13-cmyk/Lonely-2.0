@@ -18,7 +18,7 @@
   <!-- CSS Files -->
   <link href="/res/site/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/res/site/assets/css/paper-kit.css?v=2.2.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <!-- CSS Style -->
   <link href="/res/site/assets/demo/demo.css" rel="stylesheet" />
   <link rel="stylesheet" href="/views/css/style.css">
   <!-- CSS JS Loader a -->
@@ -33,7 +33,7 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="300">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/paper-kit/index.html" rel="tooltip" title="Coded by Creative Tim" data-placement="bottom" target="_blank">
+        <a class="navbar-brand" href="/" rel="tooltip"  data-placement="bottom">
           Lonely
         </a>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,11 @@
         <ul class="navbar-nav">
           
           <li class="nav-item">
-            <a class="nav-link" href="/admin/login"><i class="nc-icon nc-single-02" aria-hidden="true"></i>&nbsp;LOGIN</a>
+            <a class="nav-link" href="/admin/login"><i class="nc-icon nc-single-02" title="Login" aria-hidden="true"></i>&nbsp;</a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/admin/login"><i class="nc-icon nc-vector" title="Teste de internet" aria-hidden="true"></i>&nbsp;</a>
+            </li>
           
         </ul>
       </div>
